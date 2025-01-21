@@ -1,6 +1,5 @@
 class Circle
 {
-  private Random rand = new Random();
   private int size;
   /* Base color determines true color, while r, g, and b represent
      changing color. */
@@ -80,20 +79,19 @@ class Circle
     return sqrt(pow(x - mouseX, 2) + pow(y - mouseY , 2));
   }
   
-  public void setBrightness(int brightness, HashSet<String> include)
+  public float computeDistance(Position sourcePos)
   {
-    if (include.contains("r"))
-    {
-      r = baseR + brightness;
-    }
-    if (include.contains("g"))
-    {
-      g = baseG + brightness;
-    }
-    if (include.contains("b"))
-    {
-      b = baseB + brightness;
-    }
+    /* Uses the pythagorean theorem to get the distance between the source
+       and the circle. */
+    return sqrt(pow(x - sourcePos.getX(), 2) + pow(y - sourcePos.getY() , 2));
+  }
+  
+  public void setBrightness(float brightness, Color c)
+  {
+    float ratio = brightness / MAX_BRIGHTNESS;
+    r = baseR + (int)(ratio * c.getR());
+    g = baseG + (int)(ratio * c.getG());
+    b = baseB + (int)(ratio * c.getB());
   }
   
   public void resetBrightness()

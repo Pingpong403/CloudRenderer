@@ -1,24 +1,51 @@
 class Button
 {
-  private int x;
-  private int y;
+  private Position pos;
   private String text;
+  private Color c;
+  private int w = 90;
+  private int h = 40;
+  private boolean pressed = false;
   
-  public Button(int x, int y, String text)
+  public Button(Position pos, String text, Color c)
   {
-    this.x = x;
-    this.y = y;
+    this.pos = pos;
     this.text = text;
+    this.c = c;
   }
+  
+  public Button(Position pos, String text, Color c, int w, int h)
+  {
+    this.pos = pos;
+    this.text = text;
+    this.c = c;
+    this.w = w;
+    this.h = h;
+  }
+  
+  public String getText() { return text; }
+  public Color getColor() { return c; }
+  public boolean isPressed() { return pressed; }
+  
+  public void setText(String text) { this.text = text; }
+  
+  public boolean isMouseWithin()
+  {
+    return mouseX > pos.getX() && mouseX < pos.getX() + w &&
+           mouseY > pos.getY() && mouseY < pos.getY() + h;
+  }
+  
+  public void press  () { pressed = true;  }
+  public void unpress() { pressed = false; }
   
   public void display()
   {
-    stroke(100);
-    fill(200);
-    rect(x, y, 90, 40);
-    fill(0);
+    c.setStroke(pressed ? 100 : 190);
+    c.setFill(pressed ? 190 : 100);
+    rect(pos.getX(), pos.getY(), w, h);
+    c.setFill(255);
     textAlign(CENTER);
-    textSize(30);
-    text(text, x + 45, y + 30);
+    textSize(h * 3 / 4);
+    text(text, pos.getX() + (w / 2), pos.getY() + (h * 3 / 4));
   }
 }
