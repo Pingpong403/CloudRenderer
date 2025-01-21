@@ -3,7 +3,7 @@ class Button
   private Position pos;
   private String text;
   private Color c;
-  private int w = 90;
+  private int w = 100;
   private int h = 40;
   private boolean pressed = false;
   
@@ -40,6 +40,7 @@ class Button
   
   public void display()
   {
+    rectMode(CORNER);
     c.setStroke(pressed ? 100 : 190);
     strokeWeight(1);
     c.setFill(pressed ? 190 : 100);
