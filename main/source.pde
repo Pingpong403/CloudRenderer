@@ -42,7 +42,12 @@ class Source
   public void visualize()
   {
     stroke(0, 0, 0);
+    strokeWeight(1);
     fill(255, 255, 255);
     circle(pos.getX(), pos.getY(), 5);
+    stroke(0, 128);
+    strokeWeight(3);
+    noFill();
+    circle(pos.getX(), pos.getY(), MAX_DISTANCE * 2);
   }
 }

@@ -14,7 +14,7 @@ void mouseReleased() {
 
 // CONSTANTS
 int NUM_CIRC = 150;
-int MAX_DISTANCE = 300;
+int MAX_DISTANCE = 200;
 int MAX_BRIGHTNESS = 200;
 double SLOPE = (double)MAX_BRIGHTNESS / (double)MAX_DISTANCE;
 
@@ -163,9 +163,9 @@ void draw()
     fill(255);
     textAlign(CENTER);
     textSize(30);
-    text(rainbow.getR(), 500, 350);
-    text(rainbow.getG(), 500, 380);
-    text(rainbow.getB(), 500, 410);
+    text(currentColor.getR(), 500, 350);
+    text(currentColor.getG(), 500, 380);
+    text(currentColor.getB(), 500, 410);
     
     source.visualize();
     

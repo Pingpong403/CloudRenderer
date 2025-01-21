@@ -41,6 +41,7 @@ class Button
   public void display()
   {
     c.setStroke(pressed ? 100 : 190);
+    strokeWeight(1);
     c.setFill(pressed ? 190 : 100);
     rect(pos.getX(), pos.getY(), w, h);
     c.setFill(255);

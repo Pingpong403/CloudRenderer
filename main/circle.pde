@@ -82,8 +82,8 @@ class Circle
   public float computeDistance(Position sourcePos)
   {
     /* Uses the pythagorean theorem to get the distance between the source
-       and the circle. */
-    return sqrt(pow(x - sourcePos.getX(), 2) + pow(y - sourcePos.getY() , 2));
+       and the circle's edge. */
+    return sqrt(pow(x - sourcePos.getX(), 2) + pow(y - sourcePos.getY() , 2)) - size / 2;
   }
   
   public void setBrightness(float brightness, Color c)
