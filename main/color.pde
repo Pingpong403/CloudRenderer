@@ -49,7 +49,7 @@ class Color
   public void setFill  (int a) { fill(r, g, b, a);   }
   public void setStroke(int a) { stroke(r, g, b, a); }
   
-  public void stepR(int amt) { r += amt; }
-  public void stepG(int amt) { g += amt; }
-  public void stepB(int amt) { b += amt; }
+  public void addR(int amt) { r += amt; }
+  public void addG(int amt) { g += amt; }
+  public void addB(int amt) { b += amt; }
 }

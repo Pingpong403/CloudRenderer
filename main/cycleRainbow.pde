@@ -12,24 +12,24 @@ void cycleRainbow(Color c, int amt) {
     // if blue is active too
     if (b > 0) {
       // color shifts from blue to red
-      c.stepB(-1 * amt);
-      c.stepR(amt);
+      c.addB(-1 * amt);
+      c.addR(amt);
     }
     else {
       // color shifts from red to green
-      c.stepR(-1 * amt);
-      c.stepG(amt);
+      c.addR(-1 * amt);
+      c.addG(amt);
     }
   }
   // if green is active
   else if (g > 0) {
     // color shifts from green to blue
-    c.stepG(-1 * amt);
-    c.stepB(amt);
+    c.addG(-1 * amt);
+    c.addB(amt);
   }
   else {
     // if only blue is active, shift from blue to red
-    c.stepB(-1 * amt);
-    c.stepR(amt);
+    c.addB(-1 * amt);
+    c.addR(amt);
   }
 }
