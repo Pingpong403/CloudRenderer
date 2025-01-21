@@ -26,3 +26,16 @@ Other than those conveniences, the PDE allowed me to write Java. This language i
 - More modes
 - Better color swapping, better buttons
 - Inheritance
+
+# 2 Years Later
+
+I decided to revisit this project in early 2025 after having left it since I published it. Here's a list of all the changes I've made:
+
+- The new Color class is now the basis for anything color-related (so, basically everything)
+- The new Button class greatly improves the UI and UX
+- The new Slider class enables easy custom colors
+- Added option to switch between the bouncing Source or the user's mouse as the source of light
+- Refactored to allow for any number of Color Buttons to be added.
+- Slightly improved performance and greatly improved cohesion across the classes
+
+I may revisit this again in the future, but, for now, I am happy with where these changes have left the project.
