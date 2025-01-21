@@ -7,9 +7,13 @@ int startCustomR = rand.nextInt(0, 255);
 int startCustomG = rand.nextInt(0, 255);
 int startCustomB = rand.nextInt(0, 255);
 
-Slider sliderR = new Slider(new Position(900, 620), 200, (float)startCustomR / 255);
-Slider sliderG = new Slider(new Position(940, 620), 200, (float)startCustomG / 255);
-Slider sliderB = new Slider(new Position(980, 620), 200, (float)startCustomB / 255);
+Slider sliderR = new Slider(new Position(900, 670), 200, (float)startCustomR / 255);
+Slider sliderG = new Slider(new Position(940, 670), 200, (float)startCustomG / 255);
+Slider sliderB = new Slider(new Position(980, 670), 200, (float)startCustomB / 255);
+Slider dummySlider = new Slider(new Position(), 0, 0);
+
+Slider selectedSlider = dummySlider;
+boolean sliderPicked = false;
 
 Color custom = new Color(startCustomR, startCustomG, startCustomB);
 
@@ -101,12 +105,11 @@ void draw()
     {
       button.display();
     }
+    sliderR.display();
+    sliderG.display();
+    sliderB.display();
   }
   showHideButton.display();
-  
-  sliderR.display();
-  sliderG.display();
-  sliderB.display();
   
   if (mousePressed)
   {
@@ -130,20 +133,38 @@ void draw()
       showHideButton.unpress();
     }
     
-    if (sliderR.isMouseWithin())
-    {
-      sliderR.calcRatio();
-      custom.setR((int)(255.0 * sliderR.getRatio()));
+    if (showButtons && !sliderPicked) {
+      if (sliderR.isMouseWithin())
+      {
+        selectedSlider = sliderR;
+      }
+      else if (sliderG.isMouseWithin())
+      {
+        selectedSlider = sliderG;
+      }
+      else if (sliderB.isMouseWithin())
+      {
+        selectedSlider = sliderB;
+      }
+      sliderPicked = true;
     }
-    if (sliderG.isMouseWithin())
+    else if (sliderPicked)
     {
-      sliderG.calcRatio();
-      custom.setG((int)(255.0 * sliderG.getRatio()));
-    }
-    if (sliderB.isMouseWithin())
-    {
-      sliderB.calcRatio();
-      custom.setB((int)(255.0 * sliderB.getRatio()));
+      if (selectedSlider == sliderR)
+      {
+        sliderR.calcRatio();
+        custom.setR((int)(255.0 * sliderR.getRatio()));
+      }
+      if (selectedSlider == sliderG)
+      {
+        sliderG.calcRatio();
+        custom.setG((int)(255.0 * sliderG.getRatio()));
+      }
+      if (selectedSlider == sliderB)
+      {
+        sliderB.calcRatio();
+        custom.setB((int)(255.0 * sliderB.getRatio()));
+      }
     }
   }
   
@@ -159,6 +180,8 @@ void draw()
           b.unpress();
         }
       }
+      selectedSlider = dummySlider;
+      sliderPicked = false;
     }
     if (showHideButton.isMouseWithin())
     {

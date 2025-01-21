@@ -35,8 +35,11 @@ class Slider
   
   public boolean isMouseWithin()
   {
-    return mouseX > pos.getX() - 20     && mouseX < pos.getX() + 20 &&
-           mouseY > pos.getY() - 20 - h && mouseY < pos.getY() + 20;
+    // rect(pos.getX(), pos.getY() - h * ratio, 20, 40);
+    return mouseX > pos.getX() - 10 &&
+           mouseX < pos.getX() + 10 &&
+           mouseY > pos.getY() - h * ratio - 20 &&
+           mouseY < pos.getY() - h * ratio + 20;
   }
   
   public void calcRatio() {
