@@ -48,6 +48,6 @@ class Source
     stroke(0, 128);
     strokeWeight(3);
     noFill();
-    circle(pos.getX(), pos.getY(), MAX_DISTANCE * 2);
+    circle(pos.getX(), pos.getY(), maxDistance * 2);
   }
 }

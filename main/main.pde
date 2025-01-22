@@ -16,23 +16,28 @@ int startCustomR = rand.nextInt(0, 255);
 int startCustomG = rand.nextInt(0, 255);
 int startCustomB = rand.nextInt(0, 255);
 
-Slider sliderR = new Slider(new Position(900, 670), 200, (float)startCustomR / 255);
-Slider sliderG = new Slider(new Position(940, 670), 200, (float)startCustomG / 255);
-Slider sliderB = new Slider(new Position(980, 670), 200, (float)startCustomB / 255);
-Slider dummySlider = new Slider(new Position(), 0, 0);
+Slider sliderR = new Slider(new Position(900, 670), "R", 200, (float)startCustomR / 255);
+Slider sliderG = new Slider(new Position(940, 670), "G", 200, (float)startCustomG / 255);
+Slider sliderB = new Slider(new Position(980, 670), "B", 200, (float)startCustomB / 255);
+
+Slider sizeSlider = new Slider(new Position(820, 670), "Size", 200, 0.3);
+
+Slider dummySlider = new Slider(new Position(), "", 0, 0);
 
 Slider selectedSlider = dummySlider; // so selectedSlider always points to a slider
 boolean sliderPicked = false;
+
 
 // Set up special colors
 Color custom = new Color(startCustomR, startCustomG, startCustomB);
 Color rainbow = new Color(255, 0, 0);
 
-// CONSTANTS
+// Simulation variables
 int NUM_CIRC = 150;
-int MAX_DISTANCE = 200;
-int MAX_BRIGHTNESS = 200;
-double SLOPE = (double)MAX_BRIGHTNESS / (double)MAX_DISTANCE;
+
+int maxDistance = 200;
+int maxBrightness = 255;
+double slope;
 
 // Buttons and settings
 Button whiteButton = new Button(new Position(20, 20), "White", new Color(255, 255, 255));
@@ -65,6 +70,9 @@ void setup()
   // Set up the screen size
   size(1000, 700);
   
+  // Set up the slope of brightness
+  slope = (double)maxBrightness / (double)maxDistance;
+  
   // Set up the color buttons
   colorButtons.add(whiteButton);
   colorButtons.add(redButton);
@@ -92,12 +100,13 @@ void draw()
   {
     stroke(0, 0, 0, 0);
     c.resetBrightness();
-    float distance = followSource? c.computeDistance(source.getPos()) :
-                                   c.computeDistance();
+    float distance = followSource ? c.computeDistance(source.getPos()) :
+                                    c.computeDistance();
+                                    
     // Each circle's color gets brighter if within MAX_DISTANCE, up to MAX_BRIGHTNESS.
-    if (distance < MAX_DISTANCE)
+    if (distance < maxDistance)
     {
-      c.setBrightness((float)(MAX_BRIGHTNESS - SLOPE * distance), currentColor);
+      c.setBrightness(distance, currentColor);
     }
     c.getColor().setFill();
     circle(c.getPosition().getX(), c.getPosition().getY(), c.getSize());
@@ -115,6 +124,8 @@ void draw()
     sliderR.display();
     sliderG.display();
     sliderB.display();
+    
+    sizeSlider.display();
     
     toggleSourceButton.display();
   }
@@ -137,6 +148,7 @@ void draw()
       if      (sliderR.isMouseWithin()) selectedSlider = sliderR;
       else if (sliderG.isMouseWithin()) selectedSlider = sliderG;
       else if (sliderB.isMouseWithin()) selectedSlider = sliderB;
+      else if (sizeSlider.isMouseWithin()) selectedSlider = sizeSlider;
       sliderPicked = true;
     }
     else if (sliderPicked)
@@ -146,15 +158,20 @@ void draw()
         sliderR.calcRatio();
         custom.setR((int)(255.0 * sliderR.getRatio()));
       }
-      if (selectedSlider == sliderG)
+      else if (selectedSlider == sliderG)
       {
         sliderG.calcRatio();
         custom.setG((int)(255.0 * sliderG.getRatio()));
       }
-      if (selectedSlider == sliderB)
+      else if (selectedSlider == sliderB)
       {
         sliderB.calcRatio();
         custom.setB((int)(255.0 * sliderB.getRatio()));
+      }
+      else if (selectedSlider == sizeSlider)
+      {
+        sizeSlider.calcRatio();
+        maxDistance = (int)(500.0 * sizeSlider.getRatio() + 50);
       }
     }
   }

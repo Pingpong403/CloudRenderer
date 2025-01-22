@@ -35,12 +35,26 @@ class Circle
                  size / 2;
   }
   
-  public void setBrightness(float brightness, Color c)
+  public void setBrightness(float distance, Color c)
   {
-    float ratio = brightness / MAX_BRIGHTNESS;
-    currentC.setR(baseC.getR() + (int)(ratio * c.getR()));
-    currentC.setG(baseC.getG() + (int)(ratio * c.getG()));
-    currentC.setB(baseC.getB() + (int)(ratio * c.getB()));
+    float rInfluence = (float)c.getR() / 255;
+    float gInfluence = (float)c.getG() / 255;
+    float bInfluence = (float)c.getB() / 255;
+    
+    // x-axis: distance
+    // y-axis: brightness
+    float rSlope = (((float)baseC.getR() - maxBrightness) * rInfluence) / maxDistance;
+    float gSlope = (((float)baseC.getG() - maxBrightness) * gInfluence) / maxDistance;
+    float bSlope = (((float)baseC.getB() - maxBrightness) * bInfluence) / maxDistance;
+    
+    float rIntercept = (float)baseC.getR() + rInfluence * maxBrightness - rInfluence * baseC.getR();
+    float gIntercept = (float)baseC.getG() + gInfluence * maxBrightness - gInfluence * baseC.getG();
+    float bIntercept = (float)baseC.getB() + bInfluence * maxBrightness - bInfluence * baseC.getB();
+    
+    // y = mx + b
+    currentC.setR((int)(rSlope * distance + rIntercept));
+    currentC.setG((int)(gSlope * distance + gIntercept));
+    currentC.setB((int)(bSlope * distance + bIntercept));
   }
   
   public void resetBrightness()

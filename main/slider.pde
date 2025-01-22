@@ -1,35 +1,49 @@
 class Slider
 {
   private Position pos;
+  private String label;
   private int h;
   private float ratio;
   
   public Slider()
   {
     pos = new Position();
+    label = "";
     h = 200;
     ratio = 0;
   }
   
-  public Slider(Position pos, int h)
+  public Slider(Position pos, String label)
   {
     this.pos = pos;
+    this.label = label;
+    this.h = 200;
+    ratio = 0;
+  }
+  
+  public Slider(Position pos, String label, int h)
+  {
+    this.pos = pos;
+    this.label = label;
     this.h = h;
     ratio = 0;
   }
   
-  public Slider(Position pos, int h, float ratio)
+  public Slider(Position pos, String label, int h, float ratio)
   {
     this.pos = pos;
+    this.label = label;
     this.h = h;
     this.ratio = ratio;
   }
   
   public Position getPosition() { return pos; }
+  public String getLabel() { return label; }
   public int getHeight() { return h; }
   public float getRatio() { return ratio; }
   
   //public void setPosition(Position pos) { this.pos = pos; }
+  //public void setLabel(String label) { this.label = label; }
   //public void setHeight(int h) { this.h = h; }
   //public void setRatio(float ratio) { this.ratio = ratio; }
   
@@ -60,6 +74,13 @@ class Slider
   
   public void display()
   {
+    // draw label
+    fill(255);
+    noStroke();
+    textSize(20);
+    textAlign(CENTER);
+    text(label, pos.getX(), pos.getY() - h - 20);
+    
     // draw slide track
     stroke(255);
     line(pos.getX(), pos.getY(), pos.getX(), pos.getY() - h);
