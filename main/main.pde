@@ -1,6 +1,8 @@
 import java.util.Random;
 import java.util.LinkedList;
 
+boolean showFPS = false;
+
 // CUSTOM MOUSE CLICKING TOOL
 boolean mouseChoose = false;
 void mouseReleased()
@@ -282,4 +284,14 @@ void draw()
   
   cycleRainbow(rainbow, 20);
   mouseChoose = false;
+  
+  // Show FPS
+  if (showFPS)
+  {
+    noStroke();
+    fill(0, 255, 0);
+    textSize(40);
+    textAlign(CENTER);
+    text((int)frameRate, 500, 50);
+  }
 }
