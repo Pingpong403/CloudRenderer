@@ -37,7 +37,6 @@ Color rainbow = new Color(255, 0, 0);
 
 // Simulation variables
 int NUM_CIRC = 150;
-
 int maxDistance = 200;
 int maxBrightness = 255;
 double slope;
@@ -101,7 +100,6 @@ void draw()
   // Render circles.
   for (Circle c : circles)
   {
-    stroke(0, 0, 0, 0);
     c.resetBrightness();
     float distance = followSource ? c.computeDistance(source.getPos()) :
                                     c.computeDistance();
@@ -111,6 +109,7 @@ void draw()
     {
       c.setBrightness(distance, currentColor);
     }
+    noStroke();
     c.getColor().setFill();
     circle(c.getPosition().getX(), c.getPosition().getY(), c.getSize());
   }
@@ -282,7 +281,7 @@ void draw()
     text("Press any key to exit debug", 500, 650);
   }
   
-  cycleRainbow(rainbow, 20);
+  cycleRainbow(rainbow, 10);
   mouseChoose = false;
   
   // Show FPS
