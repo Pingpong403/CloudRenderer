@@ -3,7 +3,8 @@ import java.util.LinkedList;
 
 // CUSTOM MOUSE CLICKING TOOL
 boolean mouseChoose = false;
-void mouseReleased() {
+void mouseReleased()
+{
   mouseChoose = true;
   // set to false at the end of drawing phase
 }
@@ -144,7 +145,8 @@ void draw()
     if (showHideButton.isMouseWithin()) showHideButton.press();
     else showHideButton.unpress();
     
-    if (showButtons && !sliderPicked) {
+    if (showButtons && !sliderPicked)
+    {
       if      (sliderR.isMouseWithin()) selectedSlider = sliderR;
       else if (sliderG.isMouseWithin()) selectedSlider = sliderG;
       else if (sliderB.isMouseWithin()) selectedSlider = sliderB;
@@ -253,7 +255,18 @@ void draw()
     text(sliderR.getPosition().getY(), 500, 510);
     text(sliderR.getPosition().getY() - mouseY, 500, 540);
     
-    source.visualize();
+    if (followSource) source.visualize();
+    else
+    {
+      stroke(0, 0, 0);
+      strokeWeight(1);
+      fill(255, 255, 255);
+      circle(mouseX, mouseY, 5);
+      stroke(0, 128);
+      strokeWeight(3);
+      noFill();
+      circle(mouseX, mouseY, maxDistance * 2);
+    }
     
     // show directions
     fill(255, 0, 0);

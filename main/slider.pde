@@ -56,7 +56,8 @@ class Slider
            mouseY < pos.getY() - h * ratio + 20;
   }
   
-  public void calcRatio() {
+  public void calcRatio()
+  {
     float diff = pos.getY() - mouseY;
     if (diff > h)
     {
